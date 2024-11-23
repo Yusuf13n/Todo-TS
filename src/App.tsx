@@ -14,7 +14,6 @@ function App() {
 
   const handleClick = () => {
     if (state.trim()) {
-      // Проверка на пустую строку или только пробелы
       dispatch(addTodo(state));
       setState("");
     }
