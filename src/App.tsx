@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Rootstate } from "./redux/store";
 import { useState } from "react";
-import { addTodo } from "./redux/todoSlice";
+import { addTodo, remove } from "./redux/todoSlice";
 
 import "./App.css";
 
@@ -9,7 +9,6 @@ function App() {
   const [state, setState] = useState<string>("");
 
   const tdo = useSelector((state: Rootstate) => state.item.todo);
-
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -23,6 +22,10 @@ function App() {
     if (e.key === "Enter") {
       handleClick();
     }
+  };
+
+  const handleRemove = (id: number) => {
+    dispatch(remove(id)); 
   };
 
   return (
@@ -45,7 +48,7 @@ function App() {
         {tdo.map((items) => (
           <li className="todo-item" key={items.id}>
             <span className="todo-text">{items.todo}</span>
-            <button className="todo-remove">Remove</button>
+            <button className="todo-remove" onClick={() => handleRemove(items.id)}>Remove</button>
           </li>
         ))}
       </ul>
